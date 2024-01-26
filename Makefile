@@ -1,16 +1,20 @@
-BUILD ?= ./build
-SRC ?= ./src
+INC_DIR = include
+SRC_DIR = src
+OBJ_DIR = obj
+CFLAGS = -c -Wall -I $(INC_DIR)
 
-all : $(BUILD)/main.o pixelartnimation.out
+OBJS = $(OBJ_DIR)/main.o $(OBJ_DIR)/utils.o
 
-pixelartnimation.out : $(BUILD)/main.o
-	g++ -o pixelartnimation.out $(BUILD)/main.o
+all: pixelartnimation.out
 
-$(BUILD)/main.o : $(SRC)/main.cpp
-	g++ -c -Wall $(SRC)/main.cpp -o $(BUILD)/main.o
+pixelartnimation.out : $(OBJS)
+	g++ -o pixelartnimation.out $(OBJS)
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+	g++ $(CFLAGS) -c $< -o $@
 
 clean :
-	rm $(BUILD)/*.o
+	rm $(OBJS)
 
 fullclean : 
-	rm $(BUILD)/*.o *.out
+	rm $(OBJS) *.out

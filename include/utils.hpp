@@ -10,8 +10,8 @@ class Pixel{
         int _blue;
     
     public:
-        Pixel();
-        Pixel(int r, int g, int b);
+        Pixel() : _red(0), _green(0), _blue(0) {};
+        Pixel(int r, int g, int b) : _red(r), _green(g), _blue(b) {};
         int getRed() const {return _red;}
         int getGreen() const {return _green;}
         int getBlue() const {return _blue;}
@@ -28,12 +28,13 @@ class PixelMatrix{
         int _sizeWidth;
 
     public:
-        PixelMatrix();
-        PixelMatrix(int h, int w);
+        PixelMatrix() : _sizeHeight(0), _sizeWidth(0) {};
+        PixelMatrix(int h, int w) : _sizeHeight(h), _sizeWidth(w) {};
         int getSizeHeight() const {return _sizeHeight;}
         int getSizeWidth() const {return _sizeWidth;}
         void setSizeHeight(int const sizeHeight){_sizeHeight = sizeHeight;}
         void setSizeWidth(int const sizeWidth){_sizeWidth = sizeWidth;}
+        bool isEmpty();
 };
 
 #endif
