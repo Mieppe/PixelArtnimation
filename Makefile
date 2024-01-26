@@ -2,13 +2,15 @@ INC_DIR = include
 SRC_DIR = src
 OBJ_DIR = obj
 CFLAGS = -c -Wall -I $(INC_DIR)
+EXE = pixelartnimation.out
 
-OBJS = $(OBJ_DIR)/main.o $(OBJ_DIR)/utils.o
+# OBJS = $(OBJ_DIR)/main.o $(OBJ_DIR)/utils.o
+OBJS = $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(wildcard $(SRC_DIR)/*.cpp))
 
-all: pixelartnimation.out
+all: $(EXE)
 
-pixelartnimation.out : $(OBJS)
-	g++ -o pixelartnimation.out $(OBJS)
+$(EXE) : $(OBJS)
+	g++ -o $(EXE) $(OBJS)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	g++ $(CFLAGS) -c $< -o $@
@@ -16,5 +18,5 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 clean :
 	rm $(OBJS)
 
-fullclean : 
-	rm $(OBJS) *.out
+fullclean : clean
+	rm $(EXE)
